@@ -353,10 +353,17 @@ export default {
   <category name="变量" colour="#a55b80" custom="VARIABLE"></category>
   <category name="函数" colour="#995ba5" custom="PROCEDURE"></category>
   <sep></sep>
+
+<!-- ————————————————————————原版———————————————————————— -->
+
+
+<!-- ————————————————————————旧版———————————————————————— -->
+
   <category name="基础接口" colour="#9fa55b">
     <block type="newintpos"></block>
     <block type="newfloatpos"></block>
   </category>
+
   <category name="命令操作" colour="#5b67a5">
     <block type="runcmd">
       <value name="cmd">
@@ -396,6 +403,7 @@ export default {
     </block>
     <block type="sendcmdoutput"></block>
   </category>
+  
   <category name="玩家操作" colour="#a5745b">
     <block type="getonlineplayers"></block>
     <block type="playerobject">
@@ -414,7 +422,7 @@ export default {
       </value>
       <value name="msg">
         <block type="text">
-          <field name="TEXT">我就想踢你，咋滴</field>
+          <field name="TEXT">你被踢了！</field>
         </block>
       </value>
     </block>
@@ -576,6 +584,7 @@ export default {
       </value>
     </block>
   </category>
+
 </xml>
                 `,
             },
