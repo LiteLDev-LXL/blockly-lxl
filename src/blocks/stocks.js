@@ -1,5 +1,66 @@
 import * as Blockly from 'blockly/core';
 
+Blockly.Blocks['log'] = {
+  init: function () {
+    this.appendValueInput("uni")
+      .setCheck("String")
+      .appendField("输出日志：");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};Blockly.JavaScript['log'] = function (block) {
+  var value_uni = Blockly.JavaScript.valueToCode(block, 'uni', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = 'log' + '(' + value_uni + ')' + ';\n';
+  return code;
+};
+
+Blockly.Blocks['colorlog'] = {
+  init: function() {
+    this.appendValueInput("log")
+        .setCheck("String")
+        .appendField("输出彩色日志");
+    this.appendValueInput("color")
+        .setCheck("String")
+        .appendField("，颜色为");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};Blockly.JavaScript['colorlog'] = function(block) {
+  var value_log = Blockly.JavaScript.valueToCode(block, 'log', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_color = Blockly.JavaScript.valueToCode(block, 'color', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'colorlog' + '('+value_color+','+value_log+')' + ';\n';
+  return code;
+};
+
+Blockly.Blocks['settimeout'] = {
+  init: function() {
+    this.appendStatementInput("func")
+        .setCheck(null)
+        .appendField("延时函数");
+    this.appendValueInput("timeout")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("时间");
+    this.setOutput(true, null);
+    this.setColour(330);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};Blockly.JavaScript['settimeout'] = function(block) {
+  var statements_func = Blockly.JavaScript.statementToCode(block, 'func');
+  var value_timeout = Blockly.JavaScript.valueToCode(block, 'timeout', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = 'setTimeout(()=>{\n'+statements_func+'},'+value_timeout+')';
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
 Blockly.Blocks['newintpos'] = {
   init: function () {
     this.appendDummyInput()

@@ -355,7 +355,46 @@ export default {
   <sep></sep>
 
 <!-- ————————————————————————原版———————————————————————— -->
+ <category name="通用接口" colour="#282C34">
+    <block type="log">
+      <value name="uni">
+        <block type="text">
+          <field name="TEXT">hello world!</field>
+        </block>
+      </value>
+    </block>
 
+    <block type="colorlog">
+      <value name="log">
+        <block type="text">
+          <field name="TEXT">hello world!</field>
+        </block>
+      </value>
+      <value name="color">
+        <block type="text">
+          <field name="TEXT">yellow</field>
+        </block>
+      </value>
+    </block>
+
+    <block type="settimeout">
+      <value name="func">
+        <block type="log">
+          <value name="uni">
+          <block type="text">
+            <field name="TEXT">hello world!</field>
+          </block>
+        </value>
+        </block>
+      </value>
+      <value name="timeout">
+        <block type="math_number">
+          <field name="NUM">1000</field>
+        </block>
+      </value>
+    </block>
+
+  </category>
 
 <!-- ————————————————————————旧版———————————————————————— -->
 
