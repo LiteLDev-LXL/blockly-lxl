@@ -46,11 +46,12 @@ Blockly.Blocks['settimeout'] = {
         .setCheck(null)
         .appendField("延时函数");
     this.appendValueInput("timeout")
-        .setCheck(null)
+        .setCheck("Number")
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("时间");
-    this.setOutput(true, null);
-    this.setColour(330);
+        .appendField("延时(ms)");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(160);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -58,7 +59,48 @@ Blockly.Blocks['settimeout'] = {
   var statements_func = Blockly.JavaScript.statementToCode(block, 'func');
   var value_timeout = Blockly.JavaScript.valueToCode(block, 'timeout', Blockly.JavaScript.ORDER_ATOMIC);
   var code = 'setTimeout(()=>{\n'+statements_func+'},'+value_timeout+')';
-  return [code, Blockly.JavaScript.ORDER_NONE];
+  return code;
+};
+
+Blockly.Blocks['setInterval'] = {
+  init: function() {
+    this.appendStatementInput("func")
+        .setCheck(null)
+        .appendField("周期函数");
+    this.appendValueInput("timeout")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("延时(ms)");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(160);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};Blockly.JavaScript['setInterval'] = function(block) {
+  var statements_func = Blockly.JavaScript.statementToCode(block, 'func');
+  var value_timeout = Blockly.JavaScript.valueToCode(block, 'timeout', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = 'setInterval(()=>{\n'+statements_func+'},'+value_timeout+')';
+  return code;
+};
+
+Blockly.Blocks['clearinterval'] = {
+  init: function() {
+    this.appendValueInput("id")
+        .setCheck("Number")
+        .appendField("取消延迟\\周期")
+        .appendField("任务ID:");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(160);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};Blockly.JavaScript['clearinterval'] = function(block) {
+  var value_id = Blockly.JavaScript.valueToCode(block, 'id', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'clearInterval('+value_id+');\n';
+  return code;
 };
 
 Blockly.Blocks['newintpos'] = {
@@ -423,6 +465,27 @@ Blockly.Blocks['runcmdas'] = {
   return code;
 };
 
+Blockly.Blocks['talkas'] = {
+  init: function () {
+    this.appendValueInput("info")
+      .setCheck(["String", "Number"])
+      .appendField("以对象：");
+    this.appendValueInput("text")
+      .setCheck("String")
+      .appendField("的身份说话：");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(20);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};Blockly.JavaScript['talkas'] = function (block) {
+  var value_info = Blockly.JavaScript.valueToCode(block, 'info', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_text = Blockly.JavaScript.valueToCode(block, 'text', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = 'mc.getPlayer' + '(' + value_info + ')' + '.' + 'talkAs' + '(' + value_text + ')' + ';\n';
+  return code;
+};
 
 Blockly.Blocks['teleportplayer'] = {
   init: function () {
@@ -464,6 +527,56 @@ Blockly.Blocks['killplayer'] = {
   return code;
 };
 
+Blockly.Blocks['hurt'] = {
+  init: function() {
+    this.appendValueInput("info")
+        .setCheck("String")
+        .appendField("使对象：");
+    this.appendValueInput("num")
+        .setCheck("Number")
+        .appendField("造成");
+    this.appendDummyInput()
+        .appendField("点伤害");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(20);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};Blockly.JavaScript['hurt'] = function(block) {
+  var value_info = Blockly.JavaScript.valueToCode(block, 'info', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_num = Blockly.JavaScript.valueToCode(block, 'num', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'mc.getPlayer' + '(' + value_info + ')' + '.' + 'hurt' + '('+value_num+')' + ';\n';
+  return code;
+};
+
+Blockly.Blocks['setOnFire'] = {
+  init: function() {
+    this.appendValueInput("info")
+        .setCheck("String")
+        .appendField("使对象：");
+    this.appendValueInput("num")
+        .setCheck("Number")
+        .appendField("着火");
+    this.appendDummyInput()
+        .appendField("秒");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(20);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};Blockly.JavaScript['setOnFire'] = function(block) {
+  var value_info = Blockly.JavaScript.valueToCode(block, 'info', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_num = Blockly.JavaScript.valueToCode(block, 'num', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'mc.getPlayer' + '(' + value_info + ')' + '.' + 'setOnFire' + '('+value_num+')' + ';\n';
+  return code;
+};
+
 Blockly.Blocks['renameplayer'] = {
   init: function () {
     this.appendValueInput("info")
@@ -486,13 +599,57 @@ Blockly.Blocks['renameplayer'] = {
   return code;
 };
 
+Blockly.Blocks['getblockstandingon'] = {
+  init: function() {
+    this.appendValueInput("info")
+        .setCheck(null)
+        .appendField("获取对象：");
+    this.appendDummyInput()
+        .appendField("脚下方块的")
+        .appendField(new Blockly.FieldDropdown([["名字","name"], ["类型","type"], ["id","id"], ["坐标","pos"], ["数据值","tileData"]]), "type");
+    this.setOutput(true, null);
+    this.setColour(20);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};Blockly.JavaScript['getblockstandingon'] = function(block) {
+  var value_info = Blockly.JavaScript.valueToCode(block, 'info', Blockly.JavaScript.ORDER_ATOMIC);
+  var dropdown_type = block.getFieldValue('type');
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'mc.getPlayer' + '(' + value_info + ')' + '.' + 'getBlockStandingOn' + '()'+ '.' + dropdown_type;
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['getdevice'] = {
+  init: function() {
+    this.appendValueInput("info")
+        .setCheck(null)
+        .appendField("获取对象：");
+    this.appendDummyInput()
+        .appendField("的设备信息中的")
+        .appendField(new Blockly.FieldDropdown([["IP 地址","ip"], ["平均网络延迟时间（ms）","avgPing"], ["平均网络丢包率（%）","avgPacketLoss"], ["操作系统类型","os"], ["客户端识别码 ID","clientId"]]), "type");
+    this.setOutput(true, null);
+    this.setColour(20);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};Blockly.JavaScript['getdevice'] = function(block) {
+  var value_info = Blockly.JavaScript.valueToCode(block, 'info', Blockly.JavaScript.ORDER_ATOMIC);
+  var dropdown_type = block.getFieldValue('type');
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'mc.getPlayer' + '(' + value_info + ')' + '.' + 'getDevice' + '()'+ '.' + dropdown_type;
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
 Blockly.Blocks['getplayerhanditem'] = {
   init: function () {
     this.appendValueInput("info")
       .setCheck(["String", "Number"])
       .appendField("获取对象：");
     this.appendDummyInput()
-      .appendField("手上的物品");
+      .appendField("主手上的物品");
     this.setInputsInline(true);
     this.setOutput(true, "item");
     this.setColour(20);
@@ -505,13 +662,32 @@ Blockly.Blocks['getplayerhanditem'] = {
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
+Blockly.Blocks['getOffHand'] = {
+  init: function () {
+    this.appendValueInput("info")
+      .setCheck(["String", "Number"])
+      .appendField("获取对象：");
+    this.appendDummyInput()
+      .appendField("副手上的物品");
+    this.setInputsInline(true);
+    this.setOutput(true, "item");
+    this.setColour(20);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};Blockly.JavaScript['getOffHand'] = function (block) {
+  var value_info = Blockly.JavaScript.valueToCode(block, 'info', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = 'mc.getPlayer' + '(' + value_info + ')' + '.' + 'getOffHand' + '()';
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
 Blockly.Blocks['getplayerallitems'] = {
   init: function () {
     this.appendValueInput("info")
       .setCheck(["String", "Number"])
       .appendField("获取对象：");
     this.appendDummyInput()
-      .appendField("的全部物品");
+      .appendField("的物品栏全部物品");
     this.setInputsInline(true);
     this.setOutput(true, null);
     this.setColour(20);
@@ -520,7 +696,64 @@ Blockly.Blocks['getplayerallitems'] = {
   }
 };Blockly.JavaScript['getplayerallitems'] = function (block) {
   var value_info = Blockly.JavaScript.valueToCode(block, 'info', Blockly.JavaScript.ORDER_ATOMIC);
-  var code = 'mc.getPlayer' + '(' + value_info + ')' + '.' + 'getAllItems' + '()';
+  var code = 'mc.getPlayer' + '(' + value_info + ')' + '.' + 'getInventory' + '()';
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['getArmor'] = {
+  init: function () {
+    this.appendValueInput("info")
+      .setCheck(["String", "Number"])
+      .appendField("获取对象：");
+    this.appendDummyInput()
+      .appendField("的盔甲栏全部物品");
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(20);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};Blockly.JavaScript['getArmor'] = function (block) {
+  var value_info = Blockly.JavaScript.valueToCode(block, 'info', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = 'mc.getPlayer' + '(' + value_info + ')' + '.' + 'getArmor' + '()';
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['getEnderChest'] = {
+  init: function () {
+    this.appendValueInput("info")
+      .setCheck(["String", "Number"])
+      .appendField("获取对象：");
+    this.appendDummyInput()
+      .appendField("的末影箱全部物品");
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(20);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};Blockly.JavaScript['getEnderChest'] = function (block) {
+  var value_info = Blockly.JavaScript.valueToCode(block, 'info', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = 'mc.getPlayer' + '(' + value_info + ')' + '.' + 'getEnderChest' + '()';
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['getRespawnPosition'] = {
+  init: function () {
+    this.appendValueInput("info")
+      .setCheck(["String", "Number"])
+      .appendField("获取对象：");
+    this.appendDummyInput()
+      .appendField("的重生坐标");
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(20);
+    this.setTooltip("");
+    this.setHelpUrl("");
+  }
+};Blockly.JavaScript['getRespawnPosition'] = function (block) {
+  var value_info = Blockly.JavaScript.valueToCode(block, 'info', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = 'mc.getPlayer' + '(' + value_info + ')' + '.' + 'getRespawnPosition' + '()';
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
@@ -648,7 +881,7 @@ Blockly.Blocks['crashplayerclient'] = {
   }
 };Blockly.JavaScript['crashplayerclient'] = function (block) {
   var value_info = Blockly.JavaScript.valueToCode(block, 'info', Blockly.JavaScript.ORDER_ATOMIC);
-  var code = 'mc.getPlayer' + '(' + value_info + ')' + '.' + 'getAllItems' + '()';
+  var code = 'mc.getPlayer' + '(' + value_info + ')' + '.' + 'crash' + '()';
   return code;
 };
 

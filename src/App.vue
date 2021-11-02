@@ -355,6 +355,9 @@ export default {
   <sep></sep>
 
 <!-- ————————————————————————原版———————————————————————— -->
+<!-- ————————————————————————原版———————————————————————— -->
+<!-- ————————————————————————原版———————————————————————— -->
+
  <category name="通用接口" colour="#282C34">
     <block type="log">
       <value name="uni">
@@ -394,8 +397,35 @@ export default {
       </value>
     </block>
 
+    <block type="setInterval">
+      <value name="func">
+        <block type="log">
+          <value name="uni">
+          <block type="text">
+            <field name="TEXT">hello world!</field>
+          </block>
+        </value>
+        </block>
+      </value>
+      <value name="timeout">
+        <block type="math_number">
+          <field name="NUM">1000</field>
+        </block>
+      </value>
+    </block>
+
+    <block type="clearinterval">
+      <value name="id">
+        <block type="math_number">
+          <field name="NUM">1</field>
+        </block>
+      </value>
+    </block>
+
   </category>
 
+<!-- ————————————————————————旧版———————————————————————— -->
+<!-- ————————————————————————旧版———————————————————————— -->
 <!-- ————————————————————————旧版———————————————————————— -->
 
   <category name="基础接口" colour="#9fa55b">
@@ -498,6 +528,18 @@ export default {
         </block>
       </value>
     </block>
+    <block type="talkas">
+      <value name="info">
+        <block type="text">
+          <field name="TEXT">PA733</field>
+        </block>
+      </value>
+      <value name="text">
+        <block type="text">
+          <field name="TEXT">114514!</field>
+        </block>
+      </value>
+    </block>
     <block type="teleportplayer">
       <value name="info">
         <block type="text">
@@ -536,6 +578,30 @@ export default {
         </block>
       </value>
     </block>
+    <block type="hurt">
+      <value name="info">
+        <block type="text">
+          <field name="TEXT">PA733</field>
+        </block>
+      </value>
+      <value name="num">
+        <block type="math_number">
+          <field name="NUM">10</field>
+        </block>
+      </value>
+    </block>
+    <block type="setOnFire">
+      <value name="info">
+        <block type="text">
+          <field name="TEXT">PA733</field>
+        </block>
+      </value>
+      <value name="num">
+        <block type="math_number">
+          <field name="NUM">114</field>
+        </block>
+      </value>
+    </block>
     <block type="renameplayer">
       <value name="info">
         <block type="text">
@@ -548,6 +614,22 @@ export default {
         </block>
       </value>
     </block>
+    <block type="getblockstandingon">
+      <field name="type">name</field>
+      <value name="info">
+        <block type="text">
+          <field name="TEXT">PA733</field>
+        </block>
+      </value>
+    </block>
+    <block type="getdevice">
+      <field name="type">name</field>
+      <value name="info">
+        <block type="text">
+          <field name="TEXT">PA733</field>
+        </block>
+      </value>
+    </block>
     <block type="getplayerhanditem">
       <value name="info">
         <block type="text">
@@ -555,7 +637,35 @@ export default {
         </block>
       </value>
     </block>
+    <block type="getOffHand">
+      <value name="info">
+        <block type="text">
+          <field name="TEXT">PA733</field>
+        </block>
+      </value>
+    </block>
     <block type="getplayerallitems">
+      <value name="info">
+        <block type="text">
+          <field name="TEXT">PA733</field>
+        </block>
+      </value>
+    </block>
+    <block type="getArmor">
+      <value name="info">
+        <block type="text">
+          <field name="TEXT">PA733</field>
+        </block>
+      </value>
+    </block>
+    <block type="getEnderChest">
+      <value name="info">
+        <block type="text">
+          <field name="TEXT">PA733</field>
+        </block>
+      </value>
+    </block>
+    <block type="getRespawnPosition">
       <value name="info">
         <block type="text">
           <field name="TEXT">PA733</field>
