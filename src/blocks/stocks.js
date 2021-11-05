@@ -757,6 +757,73 @@ Blockly.Blocks['getRespawnPosition'] = {
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
+Blockly.Blocks['clearitem'] = {
+  init: function() {
+    this.appendValueInput("info")
+        .setCheck("String")
+        .appendField("清除对象：");
+    this.appendValueInput("item")
+        .setCheck("String")
+        .appendField("身上全部的");
+    this.appendDummyInput()
+        .appendField("物品");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(20);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};Blockly.JavaScript['clearitem'] = function(block) {
+  var value_info = Blockly.JavaScript.valueToCode(block, 'info', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_item = Blockly.JavaScript.valueToCode(block, 'item', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'mc.getPlayer' + '(' + value_info + ')' + '.' + 'clearItem' + '(' + value_item + ')' + ';\n';
+  return code;
+};
+
+Blockly.Blocks['refreshitems'] = {
+  init: function() {
+    this.appendValueInput("info")
+        .setCheck(null)
+        .appendField("刷新对象：");
+    this.appendDummyInput()
+        .appendField("的物品栏");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(20);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};Blockly.JavaScript['refreshitems'] = function(block) {
+  var value_info = Blockly.JavaScript.valueToCode(block, 'info', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'mc.getPlayer' + '(' + value_info + ')' + '.' + 'refreshItems' + '()' + ';\n';
+  return code;
+};
+
+Blockly.Blocks['refreshChunks'] = {
+  init: function() {
+    this.appendValueInput("info")
+        .setCheck(null)
+        .appendField("刷新对象：");
+    this.appendDummyInput()
+        .appendField("所加载的区块");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(20);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};Blockly.JavaScript['refreshChunks'] = function(block) {
+  var value_info = Blockly.JavaScript.valueToCode(block, 'info', Blockly.JavaScript.ORDER_ATOMIC);
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'mc.getPlayer' + '(' + value_info + ')' + '.' + 'refreshChunks' + '()' + ';\n';
+  return code;
+};
+
 Blockly.Blocks['setplayerpermlevel'] = {
   init: function () {
     this.appendValueInput("info")
@@ -881,28 +948,41 @@ Blockly.Blocks['crashplayerclient'] = {
   }
 };Blockly.JavaScript['crashplayerclient'] = function (block) {
   var value_info = Blockly.JavaScript.valueToCode(block, 'info', Blockly.JavaScript.ORDER_ATOMIC);
-  var code = 'mc.getPlayer' + '(' + value_info + ')' + '.' + 'crash' + '()';
+  var code = 'mc.getPlayer' + '(' + value_info + ')' + '.' + 'crash' + '()'+ ';\n';
   return code;
 };
 
-Blockly.Blocks['getplayerscore'] = {
-  init: function () {
+Blockly.Blocks['setsidebar'] = {
+  init: function() {
     this.appendValueInput("info")
-      .setCheck(["String", "Number"])
-      .appendField("获取对象：");
-    this.appendValueInput("name")
-      .setCheck("String")
-      .appendField("在计分板：");
+        .setCheck("String")
+        .appendField("设置对象：");
+    this.appendValueInput("title")
+        .setCheck("String")
+        .appendField("侧边栏标题：");
+    this.appendValueInput("data")
+        .setCheck("String")
+        .appendField("侧边栏对象内容：");
     this.appendDummyInput()
-      .appendField("上的值");
-    this.setInputsInline(true);
-    this.setOutput(true, "Number");
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("侧边栏排序：")
+        .appendField(new Blockly.FieldDropdown([["分数降序","1"], ["分数升序","0"]]), "sortOrder");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
     this.setColour(20);
-    this.setTooltip("");
-    this.setHelpUrl("");
+ this.setTooltip("");
+ this.setHelpUrl("");
   }
+};Blockly.JavaScript['setsidebar'] = function(block) {
+  var value_info = Blockly.JavaScript.valueToCode(block, 'info', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_title = Blockly.JavaScript.valueToCode(block, 'title', Blockly.JavaScript.ORDER_ATOMIC);
+  var value_data = Blockly.JavaScript.valueToCode(block, 'data', Blockly.JavaScript.ORDER_ATOMIC);
+  var dropdown_sortorder = block.getFieldValue('sortOrder');
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'mc.getPlayer' + '(' + value_info + ')' + '.' + 'setSidebar' + '("' + value_title + '",{' + value_data + '},' + dropdown_sortorder + ')' + ';\n';
+  return code;
 };
-
 
 
 

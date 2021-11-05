@@ -2,13 +2,22 @@
     <div id="app">
         <BlocklyComponent id="blockly" :options="options" ref="foo" @click="showCode()"></BlocklyComponent>
         <p id="code">
+        
+       
+        <m-button size="max" type="info" style="color:#ffffff;background-color:#008766;font-weight:bold" @click="gotodoc()">LXL文档页</m-button>
+        <m-button size="samll" type="info" style="color:#000000;background-color:#DBD2CC" @click="demoplug()">示例插件</m-button>
+        <m-button size="samll" type="info" style="color:#000000;background-color:#DBD2CC" @click="downplug()">LXL下载</m-button>
+
+
+        <m-button mode="float-icon" size="normal" theme="color" style="position:absolute;right:0px;top:0px;" @click="download()">
+        <m-icon value="file_download"></m-icon>
+        </m-button> 
+       
+        <!-- <input ref="filElem" type="file" class="upload-file" style="display: none" @change="getFile"> -->
+        
+        
         <pre v-html="code"></pre>
-        <m-button mode="float-icon" size="large" theme="color" style="position:absolute;right:0px;top:0px;"
-            @click="uploadXml()">
-            <m-icon value="file_upload"></m-icon>
-        </m-button>
-        <input ref="filElem" type="file" class="upload-file" style="display: none" @change="getFile">
-        </p>
+        </p> 
     </div>
 </template>
 
@@ -672,6 +681,32 @@ export default {
         </block>
       </value>
     </block>
+    <block type="clearitem">
+      <value name="info">
+        <block type="text">
+          <field name="TEXT">PA733</field>
+        </block>
+      </value>
+      <value name="item">
+        <block type="text">
+          <field name="TEXT">minecraft:bread</field>
+        </block>
+      </value>
+    </block>
+    <block type="refreshitems">
+      <value name="info">
+        <block type="text">
+          <field name="TEXT">PA733</field>
+        </block>
+      </value>
+    </block>
+    <block type="refreshChunks">
+      <value name="info">
+        <block type="text">
+          <field name="TEXT">PA733</field>
+        </block>
+      </value>
+    </block>
     <block type="setplayerpermlevel">
       <value name="info">
         <block type="text">
@@ -732,6 +767,28 @@ export default {
         </block>
       </value>
     </block>
+    <block type="setsidebar">
+      <value name="info">
+        <block type="text">
+          <field name="TEXT">PA733</field>
+        </block>
+      </value>
+      <value name="title">
+        <block type="text">
+          <field name="TEXT">Money</field>
+        </block>
+      </value>
+      <value name="data">
+        <block type="text">
+          <field name="TEXT">"PA733":100,"eoe":80,"YQ":114514</field>
+        </block>
+      </value>
+    </block>
+
+
+
+
+
   </category>
 
 </xml>
@@ -743,9 +800,38 @@ export default {
         showCode() {
             this.code = BlocklyJS.workspaceToCode(this.$refs["foo"].workspace);
         },
-        uploadXml() {
-            this.$refs.filElem.dispatchEvent(new MouseEvent('click'));
+        download() {
+          let str = this.code;
+          // let x = document.getElementById("output");
+          function custon_file() {
+              var name = prompt("请输入要生成的文件名：", "lxl-plugin");
+              if (name != null) 
+              {
+                window.alert("您的文件名为 "+ name + ".js,点击确认开始下载...")
+                download(name+".js",str);
+              }
+
+          }
+          function download(filename, text) {
+          var element = document.createElement('a');
+          element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+          element.setAttribute('download', filename);
+          element.style.display = 'none';
+          document.body.appendChild(element);
+          element.click();
+          document.body.removeChild(element);
+        }
+        custon_file();
         },
+        gotodoc(){
+          window.open("https://lxl.litebds.com/#/zh_CN/Development/");
+        },
+        demoplug(){
+          window.open("https://github.com/LiteLDev-LXL");
+        },
+        downplug(){
+          window.open("https://www.minebbs.com/resources/litexloader-x-bds.2670/");
+        }
     },
 };
 </script>
