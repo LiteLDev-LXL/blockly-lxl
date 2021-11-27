@@ -70,7 +70,7 @@ Blockly.Blocks['setInterval'] = {
     this.appendValueInput("timeout")
         .setCheck("Number")
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("延时(ms)");
+        .appendField("周期(ms)");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(160);
@@ -79,8 +79,8 @@ Blockly.Blocks['setInterval'] = {
   }
 };Blockly.JavaScript['setInterval'] = function(block) {
   var statements_func = Blockly.JavaScript.statementToCode(block, 'func');
-  var value_timeout = Blockly.JavaScript.valueToCode(block, 'timeout', Blockly.JavaScript.ORDER_ATOMIC);
-  var code = 'setInterval(()=>{\n'+statements_func+'},'+value_timeout+')';
+  var cycle_time = Blockly.JavaScript.valueToCode(block, 'timeout', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = 'setInterval(()=>{\n'+statements_func+'},'+cycle_time+')';
   return code;
 };
 
