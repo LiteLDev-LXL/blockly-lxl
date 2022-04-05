@@ -2,21 +2,24 @@
     <div id="app">
         <BlocklyComponent id="blockly" :options="options" ref="foo" @click="showCode()"></BlocklyComponent>
         <p id="code">
-        
-       
-        <m-button size="max" type="info" style="color:#ffffff;background-color:#008766;font-weight:bold" @click="gotodoc()">LXL文档页</m-button>
-        <m-button size="samll" type="info" style="color:#000000;background-color:#DBD2CC" @click="demoplug()">示例插件</m-button>
-        <m-button size="samll" type="info" style="color:#000000;background-color:#DBD2CC" @click="downplug()">LXL下载</m-button>
+          <button href="https://lxl.litebds.com/#/zh_CN/Development/" id="menubuttons" size="max" type="info" style="color:#ffffff;background-color:#008766;font-weight:bold" @click="gotodoc()">
+              LXL文档页
+          </button>
+          <button id="menubuttons" size="small" type="info" style="color:#000000;background-color:#DBD2CC" @click="demoplug()">
+            示例插件
+          </button>
+          <button id="menubuttons" size="small" type="info" style="color:#000000;background-color:#DBD2CC;" @click="downplug()">
+            LXL下载
+          </button>
 
-
-        <m-button mode="float-icon" size="normal" theme="color" style="position:absolute;right:0px;top:0px;" @click="download()">
-        <m-icon value="file_download"></m-icon>
-        </m-button> 
-       
-        <!-- <input ref="filElem" type="file" class="upload-file" style="display: none" @change="getFile"> -->
+          <button id="downloadbutton" size="normal" theme="color" @click="download()">
+            <svg id="edcD1BShn9F1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 640 640" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><g transform="matrix(2.5 0 0 1.75-476.329552-39.889714)"><line x1="0" y1="-128.689884" x2="0" y2="-27.689884" transform="matrix(25 0 0 1 320 233.341149)" fill="none" stroke="#fff" stroke-width="3"/><polygon points="0,-12.923474 11.192057,6.461737 -11.192057,6.461737 0,-12.923474" transform="matrix(-6.704883 0 0-5.297823 320 216.774109)" fill="#fff" stroke-width="0"/></g><rect width="342.385" height="46.4345" rx="0" ry="0" transform="matrix(1.082173 0 0-1.020139 138.410548 542.086399)" fill="#fff" stroke-width="0"/></svg>
+          </button> 
         
-        
-        <pre v-html="code"></pre>
+          <!-- <input ref="filElem" type="file" class="upload-file" style="display: none" @change="getFile"> -->
+          
+          
+          <pre v-html="code"></pre>
         </p> 
     </div>
 </template>
@@ -803,25 +806,24 @@ export default {
         download() {
           let str = this.code;
           // let x = document.getElementById("output");
-          function custon_file() {
+          function custom_file() {
               var name = prompt("请输入要生成的文件名：", "lxl-plugin");
-              if (name != null) 
-              {
+              if (name != null) {
                 window.alert("您的文件名为 "+ name + ".js,点击确认开始下载...")
                 download(name+".js",str);
               }
 
           }
           function download(filename, text) {
-          var element = document.createElement('a');
-          element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-          element.setAttribute('download', filename);
-          element.style.display = 'none';
-          document.body.appendChild(element);
-          element.click();
-          document.body.removeChild(element);
-        }
-        custon_file();
+              var element = document.createElement('a');
+              element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+              element.setAttribute('download', filename);
+              element.style.display = 'none';
+              document.body.appendChild(element);
+              element.click();
+              document.body.removeChild(element);
+          }
+        custom_file();
         },
         gotodoc(){
           window.open("https://lxl.litebds.com/#/zh_CN/Development/");
@@ -847,6 +849,53 @@ export default {
 html,
 body {
   margin: 0;
+}
+
+#menubuttons {
+  display: inline-block;
+  vertical-align: middle;
+  min-height: 36px;
+  border-radius: 2px;
+  min-width: 72px;
+  text-transform: uppercase;
+  cursor: pointer;
+  user-select: none;
+  font-size: .9rem;
+  letter-spacing: 1px;
+  position: relative;
+  border: none;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 8px;
+  padding-right: 8px;
+  transition: 0.2s;
+  opacity: 0.85;
+}
+
+#downloadbutton {
+  background-color:#36A0F4;
+  border-radius:50%;
+  height:40px;
+  width:40px;
+  position:absolute;
+  right:1px;
+  top:1px;
+  border: 0px;
+  cursor: pointer;
+}
+
+button {
+  transition:0.5s;
+}
+
+#menubuttons:hover {
+  /*background-image: linear-gradient(rgba(0, 0, 0, 0.05) 0 0);*/
+  opacity: 1;
+}
+
+#downloadbutton:hover {
+    /*background-image: linear-gradient(rgba(255, 255, 255, 0.05) 0 0);*/
+    opacity: 0.9
 }
 
 #code {
