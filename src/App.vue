@@ -2,15 +2,21 @@
     <div id="app">
         <BlocklyComponent id="blockly" :options="options" ref="foo" @click="showCode()"></BlocklyComponent>
         <p id="code">
-          <button href="https://lxl.litebds.com/#/zh_CN/Development/" id="menubuttons" size="max" type="info" style="color:#ffffff;background-color:#008766;font-weight:bold" @click="gotodoc()">
+          <a href="https://lxl.litebds.com/#/zh_CN/Development/" target="_blank">
+            <button id="menubuttons" size="max" type="info" style="color:#ffffff;background-color:#008766;font-weight:bold;">
               LXL文档页
-          </button>
-          <button id="menubuttons" size="small" type="info" style="color:#000000;background-color:#DBD2CC" @click="demoplug()">
-            示例插件
-          </button>
-          <button id="menubuttons" size="small" type="info" style="color:#000000;background-color:#DBD2CC;" @click="downplug()">
-            LXL下载
-          </button>
+            </button>
+          </a>
+          <a href="https://github.com/LiteLScript-Dev/blockly-lxl" target="_blank">
+            <button id="menubuttons" size="small" type="info" style="color:#000000;background-color:#DBD2CC">
+              示例插件
+            </button>
+          </a>
+          <a href="https://www.minebbs.com/resources/litexloader-x-bds.2670/" target="_blank">
+            <button id="menubuttons" size="small" type="info" style="color:#000000;background-color:#DBD2CC;">
+              LXL下载
+            </button>
+          </a>
 
           <button id="downloadbutton" size="normal" theme="color" @click="download()">
             <svg id="edcD1BShn9F1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 640 640" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><g transform="matrix(2.5 0 0 1.75-476.329552-39.889714)"><line x1="0" y1="-128.689884" x2="0" y2="-27.689884" transform="matrix(25 0 0 1 320 233.341149)" fill="none" stroke="#fff" stroke-width="3"/><polygon points="0,-12.923474 11.192057,6.461737 -11.192057,6.461737 0,-12.923474" transform="matrix(-6.704883 0 0-5.297823 320 216.774109)" fill="#fff" stroke-width="0"/></g><rect width="342.385" height="46.4345" rx="0" ry="0" transform="matrix(1.082173 0 0-1.020139 138.410548 542.086399)" fill="#fff" stroke-width="0"/></svg>
@@ -824,15 +830,6 @@ export default {
               document.body.removeChild(element);
           }
         custom_file();
-        },
-        gotodoc(){
-          window.open("https://lxl.litebds.com/#/zh_CN/Development/");
-        },
-        demoplug(){
-          window.open("https://github.com/LiteLDev-LXL");
-        },
-        downplug(){
-          window.open("https://www.minebbs.com/resources/litexloader-x-bds.2670/");
         }
     },
 };
