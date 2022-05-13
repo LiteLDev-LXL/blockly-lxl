@@ -10,10 +10,6 @@
 <script>
 import Blockly from "blockly";
 
-//设置Blockly语言为中文
-import hans from "blockly/msg/zh-hans";
-Blockly.setLocale(hans);
-
 export default {
   name: "BlocklyComponent",
   props: ["options"],
